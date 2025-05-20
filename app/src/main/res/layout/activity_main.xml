@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="명언이 들어갈 위치입니다!"
+        android:fontFamily="@font/bmjua_ttf"
         android:layout_margin="20dp"
         android:gravity="center"
         android:textColor="@color/white"
