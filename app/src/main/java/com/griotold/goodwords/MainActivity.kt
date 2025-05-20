@@ -3,6 +3,8 @@ package com.griotold.goodwords
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.griotold.goodwords.databinding.ActivityMainBinding
@@ -10,6 +12,7 @@ import com.griotold.goodwords.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    private var backPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -40,5 +43,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.goodWordTextArea.setText(sentence)
+
+        // 뒤로가기 콜백 등록
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (System.currentTimeMillis() - backPressedTime <= 2000) {
+                    finish()
+                } else {
+                    backPressedTime = System.currentTimeMillis()
+                    Toast.makeText(this@MainActivity, "한 번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 }

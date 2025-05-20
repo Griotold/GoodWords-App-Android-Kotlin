@@ -2,9 +2,13 @@ package com.griotold.goodwords
 
 import android.os.Bundle
 import android.widget.ListView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
 class SentenceActivity : AppCompatActivity() {
+
+    private var backPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,6 +33,18 @@ class SentenceActivity : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.sentenceListView)
 
         listView.adapter = adapter
+
+        // 뒤로가기 콜백 등록
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (System.currentTimeMillis() - backPressedTime <= 2000) {
+                    finish()
+                } else {
+                    backPressedTime = System.currentTimeMillis()
+                    Toast.makeText(this@SentenceActivity, "한 번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
 
     }
 }
