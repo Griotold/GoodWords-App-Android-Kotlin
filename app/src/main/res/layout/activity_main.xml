@@ -22,6 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
+            android:id="@+id/goodWordTextArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="명언이 들어갈 위치입니다!"
